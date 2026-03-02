@@ -103,24 +103,31 @@ addon.setCorner(hwnd, "round");
 ## Full Usage Example
 
 ```js
+// index.js
+import { addon, widgetWindow } from "novadesk";
+
 var win = new widgetWindow({
-  id: "blur-test",
-  x: 100,
-  y: 100,
-  width: 400,
-  height: 300,
-  backgroundColor: "rgba(255,255,255,0.8)",
-  script: "ui.js"
+    id: "addon-test",
+    x: 100,
+    y: 100,
+    width: 400,
+    height: 400,
+    backgroundColor: "rgba(10,10,10,0.5)",
+    script: "script.ui.js"
 });
 
-var addon = system.loadAddon("../dist/x64/Debug/BlurBehind/BlurBehind.dll");
-if (addon) {
-  var hwnd = String(win.getHandle());
-
-  addon.apply(hwnd, "acrylic", "round");
-  // addon.disable(hwnd);
-  // addon.setCorner(hwnd, "none");
+const blur = addon.load("../dist/x64/Debug/BlurBehind/BlurBehind.dll");
+if (blur) {
+    var hwnd = String(win.getHandle());
+    console.log("Window Handle " + hwnd);
+    var applied = blur.apply(hwnd, "blur", "round");
+    console.log("apply result: " + applied);
+    console.log("Addon loaded successfully");
+    console.log("Addon API: " + Object.keys(blur));
 }
+
+// script.ui.js
+console.log("UI script loaded");
 ```
 
 ## Build

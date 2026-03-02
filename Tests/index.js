@@ -7,7 +7,7 @@ var win = new widgetWindow({
     width: 400,
     height: 400,
     backgroundColor: "rgba(10,10,10,0.5)",
-    script: "ui.js"
+    script: "script.ui.js"
 });
 
 const blur = addon.load("../dist/x64/Debug/BlurBehind/BlurBehind.dll");
