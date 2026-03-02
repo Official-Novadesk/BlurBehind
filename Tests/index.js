@@ -1,4 +1,6 @@
-﻿var win = new widgetWindow({
+﻿import { addon, widgetWindow } from "novadesk";
+
+var win = new widgetWindow({
     id: "addon-test",
     x: 100,
     y: 100,
@@ -8,14 +10,12 @@
     script: "ui.js"
 });
 
-
-var addon = system.loadAddon("../dist/x64/Debug/BlurBehind/BlurBehind.dll");
-
-if (addon) {
+const blur = addon.load("../dist/x64/Debug/BlurBehind/BlurBehind.dll");
+if (blur) {
     var hwnd = String(win.getHandle());
     console.log("Window Handle " + hwnd);
-    var applied = addon.apply(hwnd, "blur", "round");
+    var applied = blur.apply(hwnd, "blur", "round");
     console.log("apply result: " + applied);
     console.log("Addon loaded successfully");
-    console.log("Addon API: " + Object.keys(addon));
+    console.log("Addon API: " + Object.keys(blur));
 }
